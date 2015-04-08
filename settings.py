@@ -329,8 +329,8 @@ FABRIC = {
     "LOCALE": "en_US.UTF-8", # Should end with ".UTF-8"
     "DB_PASS": "default", # Live database password
     "ADMIN_PASS": "default", # Live admin user password
-    "SECRET_KEY": SECRET_KEY,
-    "NEVERCACHE_KEY": NEVERCACHE_KEY,
+    "SECRET_KEY": "default",
+    "NEVERCACHE_KEY": "default",
 }
 
 
