@@ -94,7 +94,7 @@ MANAGERS = ADMINS
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1:8000"]
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -103,7 +103,7 @@ ALLOWED_HOSTS = []
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = None
+TIME_ZONE = "Africa/Johannesburg"
 
 # If you set this to True, Django will use timezone-aware datetimes.
 USE_TZ = True
@@ -317,21 +317,21 @@ OPTIONAL_APPS = (
 # These settings are used by the default fabfile.py provided.
 # Check fabfile.py for defaults.
 
-# FABRIC = {
-#     "SSH_USER": "", # SSH username for host deploying to
-#     "HOSTS": ALLOWED_HOSTS[:1], # List of hosts to deploy to (eg, first host)
-#     "DOMAINS": ALLOWED_HOSTS, # Domains for public site
-#     "REPO_URL": "ssh://hg@bitbucket.org/user/project", # Project's repo URL
-#     "VIRTUALENV_HOME":  "", # Absolute remote path for virtualenvs
-#     "PROJECT_NAME": "", # Unique identifier for project
-#     "REQUIREMENTS_PATH": "requirements.txt", # Project's pip requirements
-#     "GUNICORN_PORT": 8000, # Port gunicorn will listen on
-#     "LOCALE": "en_US.UTF-8", # Should end with ".UTF-8"
-#     "DB_PASS": "", # Live database password
-#     "ADMIN_PASS": "", # Live admin user password
-#     "SECRET_KEY": SECRET_KEY,
-#     "NEVERCACHE_KEY": NEVERCACHE_KEY,
-# }
+FABRIC = {
+    "SSH_USER": "", # SSH username for host deploying to
+    "HOSTS": ALLOWED_HOSTS[:1], # List of hosts to deploy to (eg, first host)
+    "DOMAINS": ALLOWED_HOSTS, # Domains for public site
+    "REPO_URL": "ssh://hg@bitbucket.org/user/project", # Project's repo URL
+    "VIRTUALENV_HOME":  "", # Absolute remote path for virtualenvs
+    "PROJECT_NAME": "", # Unique identifier for project
+    "REQUIREMENTS_PATH": "requirements.txt", # Project's pip requirements
+    "GUNICORN_PORT": 8000, # Port gunicorn will listen on
+    "LOCALE": "en_US.UTF-8", # Should end with ".UTF-8"
+    "DB_PASS": "default", # Live database password
+    "ADMIN_PASS": "default", # Live admin user password
+    "SECRET_KEY": SECRET_KEY,
+    "NEVERCACHE_KEY": NEVERCACHE_KEY,
+}
 
 
 ##################
