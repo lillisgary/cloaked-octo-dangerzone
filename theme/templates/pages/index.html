@@ -2,20 +2,39 @@
 {% load i18n %}
 {% load pages_tags mezzanine_tags i18n future staticfiles %}
 
-{% block extra_css %}
-{% endblock %}
-{% block extra_js %}
-{% endblock %}
 
-{% block meta_title %}{% trans "Home" %}{% endblock %}
-{% block title %}{% trans "Home" %}{% endblock %}
 
-{% block breadcrumb_menu %}
-<li class="active">{% trans "Home" %}</li>
-{% endblock %}
+{% block title %}{{ page.title }}{% endblock %}
+
+
+
+{% block l_w %}{% endblock l_w %}
 
 {% block main %}
+    
 
+<div class="header">
+    	<div class="wrap">
+        	<!--<div class="navbar navbar_ clearfix">-->
+            	<div class="container">
+                    <div class="row">
+                        <div class="span4">
+                        	<div class="logo"><a href="/"><img src="{% static "img/django.gif" %}" alt="" /></a></div>                                
+                                    <div>{{ settings.SITE_TAGLINE }}</div>                        
+                        </div>
+                        
+                           
+                        </div>
+                    </div>                
+                </div>
+             </div>
+        </div>    
+    </div>
+    <!--//header-->    
+     
+    <!--page_container-->
+    <div class="page_container">
+        
         {% if page.homepage.slides.all %}
         <!--slider-->
         <div id="main_slider">
@@ -27,8 +46,25 @@
             <div class="clear"></div>	
         </div>        
         <!--//slider-->
-        {% else %}
-          {% trans "hullo:>" %}
         {% endif %}
+                       
+        <!--planning-->
+       {{ page.homepage.content|richtext_filters|safe }}
+        <!--//planning-->
         
+        
+        
+        
+
+        
+        
+
+</br>
+
+    </div>
+    <!--//page_container-->
+        
+    
+            
 {% endblock %}
+{% block r_w %}{% endblock r_w %}
