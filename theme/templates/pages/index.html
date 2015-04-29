@@ -2,8 +2,16 @@
 {% load i18n %}
 {% load pages_tags mezzanine_tags i18n future staticfiles %}
 
-
-
+{% block extra_js %}
+<script type="text/javascript">
+$(document).ready(function(){
+     $("#myCarousel").carousel({
+         interval : 3000,
+         pause: false
+     });
+});
+</script>
+{% endblock %}
 {% block title %}{{ page.title }}{% endblock %}
 
 
@@ -89,24 +97,13 @@
     </div>
 </div>
 </div>
-                       
+          
         <!--planning-->
        {{ page.homepage.content|richtext_filters|safe }}
         <!--//planning-->
         
         
-        
-        
-
-        
-        
-
-</br>
-
-    </div>
-    <!--//page_container-->
-        
-    
-            
+                    
 {% endblock %}
+
 {% block r_w %}{% endblock r_w %}
