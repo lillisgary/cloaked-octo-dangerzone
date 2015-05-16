@@ -21,3 +21,6 @@ class Slide(Orderable):
     image = FileField(verbose_name=_("Image"),
         upload_to=upload_to("theme.Slide.image", "slider"),
         format="Image", max_length=255, null=True, blank=True)
+    featured_image = models.NullBooleanField(blank=True, help_text="The active 1st image to appear")
+
+    
