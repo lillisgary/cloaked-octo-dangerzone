@@ -1,9 +1,9 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from mezzanine.core.fields import FileField
+from mezzanine.core.fields import FileField, RichTextField
 from mezzanine.pages.models import Page
-from mezzanine.core.models import RichText, Orderable
+from mezzanine.core.models import RichText, Orderable, Slugged
 from mezzanine.utils.models import upload_to
 
 class HomePage(Page, RichText):
@@ -23,4 +23,53 @@ class Slide(Orderable):
         format="Image", max_length=255, null=True, blank=True)
     featured_image = models.NullBooleanField(blank=True, help_text="The active 1st image to appear")
 
-    
+class Portfolio(Page):
+    '''
+    A collection of individual portfolio items
+    '''
+    portfolio_item = models.ForeignKey("PortfolioItem", blank=True, null=True)
+    content = RichTextField(blank=True, null=True)
+    class Meta:
+        verbose_name = _("Portfolio")
+        verbose_name_plural = _("Portfolios")
+
+class PortfolioItem(Page, RichText):
+    '''
+    An individual portfolio item, should be nested under a Portfolio
+    '''
+    featured_image = FileField(verbose_name=_("Featured Image"),
+        upload_to=upload_to("theme.PortfolioItem.featured_image", "portfolio"),
+        format="Image", max_length=255, null=True, blank=True)
+    short_description = RichTextField(blank=True)
+    categories = models.ManyToManyField("PortfolioItemCategory",
+                                        verbose_name=_("Categories"),
+                                        blank=True,
+                                        related_name="portfolioitems")
+    href = models.CharField(max_length=2000, blank=True,
+        help_text="A link to the finished project (optional)")
+
+    class Meta:
+        verbose_name = _("Portfolio item")
+        verbose_name_plural = _("Portfolio items")
+
+class PortfolioItemImage(Orderable):
+    '''
+    An image for a PortfolioItem
+    '''
+    portfolioitem = models.ForeignKey(PortfolioItem, related_name="images")
+    file = FileField(_("File"), max_length=200, format="Image",
+        upload_to=upload_to("theme.PortfolioItemImage.file", "portfolio items"))
+
+    class Meta:
+        verbose_name = _("Image")
+        verbose_name_plural = _("Images")
+
+class PortfolioItemCategory(Slugged):
+    """
+    A category for grouping portfolio items into a series.
+    """
+
+    class Meta:
+        verbose_name = _("Portfolio Item Category")
+        verbose_name_plural = _("Portfolio Item Categories")
+        ordering = ("title",)
