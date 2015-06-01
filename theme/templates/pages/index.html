@@ -63,7 +63,7 @@ $(document).ready(function(){
         {% for slide in page.homepage.slides.all %}
             {% if slide.featured_image %}
             <div class="active item">
-                <img src="{{ MEDIA_URL }}{% thumbnail slide.image 1920 690 %}" alt="">
+                <img src="{{ MEDIA_URL }}{% thumbnail slide.image 1920 690 %}" class="img-responsive" alt="">
                 <h2>Slide 1</h2>                
          		 <div class="carousel-caption">
                   <h3>First slide label</h3>
@@ -93,48 +93,69 @@ $(document).ready(function(){
 </div>
       {% endif %}
       <!-- //Carousel -->
+<div class="container">
+<blockquote class="pull-right">
 
+  <p>The world is a dangerous place to live; not because of the people who are evil, but because of the people who don't do anything about it.</p>
+
+  <small>by <cite><a href="http://www.alberteinstein.com" >Albert Einstein</a></cite></small>
+
+</blockquote>
+</div>
         <!--featured works-->
         {% if portfolio %}
-            
-            <div class="row">  
+          
+            <div class="row text-justify">  
               {% for p_objects in portfolio %}
-                <div class="col-xs-12 col-md-6">
-                  <div class="panel panel-primary">
+                
+                  <div class="panel panel-info">
               
                     <div class="panel-heading">  
-                      <a class="panel-title" href="{{ p_objects.page_ptr.get_absolute_url }}" ><h4>{{ p_objects.title|title }}</h4></a>
+                      <h4 class="panel-title">{{ p_objects.title|title }}</h4>
                     </div>
                 
                       <div class="panel-body">
+                      
                         <div class="list-group">
+                          <ul class="list-inline">
                           {% for i in items %}
                             {% if i.page_ptr.parent_id == p_objects.id %}
-                              <a href="{{ i.page_ptr.get_absolute_url }}" class="list-group-item">
-                                <h4 class="list-group-item-heading">{{ i.title|title }}</h4>
-                                <p class="list-group-item-text">
-                                  {{ i.short_description|richtext_filters|safe|truncatewords:8 }}
-                                </p>
-                              </a>
+                            
+                              <li class="col-xs-12 col-md-3">
+                                <a href="{{ i.page_ptr.get_absolute_url }}" class="list-group-item">
+                                  <h4 class="list-group-item-heading">{{ i.title|title }}</h4>
+                                  <p class="list-group-item-text">
+                                    {{ i.short_description|richtext_filters|safe|truncatewords:25 }}
+                                  </p>
+                                </a>
+                              </li>
                             {% endif %}
-                          {% endfor %}                                  
+                          {% endfor %}
+                          </ul>                                
                         </div>
+                        
                       </div>
+                      
+                    <div class="panel-footer clearfix">
+                      <div class="pull-right">
+                        <a href="{{ p_objects.get_absolute_url }}" class="btn btn-info">View More</a>
+                      </div> 
+                    </div>
+                    
                   </div>
-                </div>    
+                   
               {% endfor %}
             </div>
-             
           
         {% endif %}
         <!--//featured works-->
-          
+        
         <!--planning-->
+       <div class="text-justify">  
        {{ page.homepage.content|richtext_filters|safe }}
-        <!--//planning-->
-        
-        
-                    
+       </div>
+        <!--//planning-->       
+         
 {% endblock %}
 
 {% block r_w %}{% endblock r_w %}

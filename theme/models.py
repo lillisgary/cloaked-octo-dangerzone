@@ -12,6 +12,16 @@ class HomePage(Page, RichText):
 	class Meta:
 		verbose_name = _("Home page")
 		verbose_name_plural = _("Home pages")
+		
+class Porter(Orderable):
+    '''
+    more portfolio's to the home page
+    '''
+    
+    homepage = models.ForeignKey(HomePage, blank=True, null=True, related_name="porter")
+    multiport = models.ForeignKey("Portfolio", blank=True, null=True,
+        help_text="If selected items from this portfolio will be featured "
+                  "on the home page.")
 
 class Slide(Orderable):
     '''
