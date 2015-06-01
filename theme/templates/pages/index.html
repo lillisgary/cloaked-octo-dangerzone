@@ -149,6 +149,21 @@ $(document).ready(function(){
           
         {% endif %}
         <!--//featured works-->
+
+        <!-- selected portfolio -->
+        <div class="wrap_block">
+        {% if page.homepage.porter %}
+          {% for porter in page.homepage.porter.all %}
+            <h4>{{ porter.multiport.title }}</h4>
+              
+              {% for kid in porter.multiport.children.all|slice:":3" %}               
+                <p>{{ kid.title }}</p>                  
+              {% endfor %}
+              
+          {% endfor %}
+        {% endif %}
+        </div>
+        <!-- //selected portfolio -->
         
         <!--planning-->
        <div class="text-justify">  
