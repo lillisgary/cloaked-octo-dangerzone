@@ -43,6 +43,24 @@ class Portfolio(Page):
         verbose_name = _("Portfolio")
         verbose_name_plural = _("Portfolios")
 
+class TempPortfolio(Page):
+	'''
+	A temp. portfolio, with a collection of selected portfolio items
+	'''
+	content = RichTextField(blank=True, null=True)
+	
+	class Meta:
+		verbose_name = _("TempPortfolio")
+		verbose_name_plural = _("TempPortfolios")
+
+class ItemPorter(Orderable):
+	'''
+	Portfolio items for TempPortfolio
+	'''
+	temp_portfolio = models.ForeignKey(TempPortfolio, related_name="item_porter", blank=True, null=True)
+	portfolio_item = models.ForeignKey("PortfolioItem", blank=True, null=True,
+	    help_text="If selected portfolio items will be featured on this porfolio")
+
 class PortfolioItem(Page, RichText):
     '''
     An individual portfolio item, should be nested under a Portfolio

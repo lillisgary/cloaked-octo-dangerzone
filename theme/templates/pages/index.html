@@ -105,7 +105,7 @@ $(document).ready(function(){
         <!--featured works-->
         {% if portfolio %}
           
-            <div class="row text-justify">  
+            <div class="row text-justify">  <!--random 4-->
               {% for p_objects in portfolio %}
                 
                   <div class="panel panel-info">
@@ -121,13 +121,20 @@ $(document).ready(function(){
                           {% for i in items %}
                             {% if i.page_ptr.parent_id == p_objects.id %}
                             
-                              <li class="col-xs-12 col-md-3">
+                              <li class="col-xs-12 col-md-3">                                                                                       
+                                <div class="thumbnail">
+                                
                                 <a href="{{ i.page_ptr.get_absolute_url }}" class="list-group-item">
-                                  <h4 class="list-group-item-heading">{{ i.title|title }}</h4>
-                                  <p class="list-group-item-text">
-                                    {{ i.short_description|richtext_filters|safe|truncatewords:25 }}
-                                  </p>
+                                  <img src="{{ MEDIA_URL }}{% thumbnail i.featured_image 238 175 %}" alt="{{ i.title|title }}">
+                                  <div class="caption">                                 
+                                    <h4 class="list-group-item-heading">{{ i.title|title }}</h4>
+                                    <p class="list-group-item-text">
+                                      {{ i.short_description|richtext_filters|safe|truncatewords:25 }}
+                                    </p>                                 
+                                  </div>
                                 </a>
+                                
+                                </div>                                                  
                               </li>
                             {% endif %}
                           {% endfor %}
@@ -151,7 +158,7 @@ $(document).ready(function(){
         <!--//featured works-->
 
         <!-- selected portfolio -->
-        <div class="wrap_block">
+        <div class="wrap_block"> <!--random 4-->
         {% if page.homepage.porter %}
           {% for porter in page.homepage.porter.all %}
             <h4>{{ porter.multiport.title }}</h4>
