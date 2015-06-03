@@ -103,40 +103,41 @@ $(document).ready(function(){
 </blockquote>
 </div>
         <!--featured works-->
-        {% if portfolio %}
+        {% if temp_portfolio %}
           
             <div class="row text-justify">  <!--random 4-->
-              {% for p_objects in portfolio %}
+              {% for tp_object in temp_portfolio %}
                 
                   <div class="panel panel-info">
               
                     <div class="panel-heading">  
-                      <h4 class="panel-title">{{ p_objects.title|title }}</h4>
+                      <h4 class="panel-title">{{ tp_object.title|title }}</h4>
                     </div>
                 
                       <div class="panel-body">
                       
                         <div class="list-group">
                           <ul class="list-inline">
-                          {% for i in items %}
-                            {% if i.page_ptr.parent_id == p_objects.id %}
+                          {% for itemporter in tp_object.item_porter.all|slice:":4" %}
+
                             
                               <li class="col-xs-12 col-md-3">                                                                                       
                                 <div class="thumbnail">
                                 
-                                <a href="{{ i.page_ptr.get_absolute_url }}" class="list-group-item">
-                                  <img src="{{ MEDIA_URL }}{% thumbnail i.featured_image 238 175 %}" alt="{{ i.title|title }}">
+                                <a href="{{ itemporter.portfolio_item.page_ptr.get_absolute_url }}" class="list-group-item">
+                                  <img src="{{ MEDIA_URL }}{% thumbnail itemporter.portfolio_item.featured_image 238 175 %}"
+                                   alt="{{ itemporter.portfolio_item.title|title }}">
                                   <div class="caption">                                 
-                                    <h4 class="list-group-item-heading">{{ i.title|title }}</h4>
+                                    <h4 class="list-group-item-heading">{{ itemporter.portfolio_item.title|title }}</h4>
                                     <p class="list-group-item-text">
-                                      {{ i.short_description|richtext_filters|safe|truncatewords:25 }}
+                                      {{ itemporter.portfolio_item.short_description|richtext_filters|safe|truncatewords:25 }}
                                     </p>                                 
                                   </div>
                                 </a>
                                 
                                 </div>                                                  
                               </li>
-                            {% endif %}
+
                           {% endfor %}
                           </ul>                                
                         </div>
@@ -145,7 +146,7 @@ $(document).ready(function(){
                       
                     <div class="panel-footer clearfix">
                       <div class="pull-right">
-                        <a href="{{ p_objects.get_absolute_url }}" class="btn btn-info">View More</a>
+                        <a href="{{ tp_object.get_absolute_url }}" class="btn btn-info">View All</a>
                       </div> 
                     </div>
                     
