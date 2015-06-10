@@ -32,6 +32,8 @@ class Slide(Orderable):
         upload_to=upload_to("theme.Slide.image", "slider"),
         format="Image", max_length=255, null=True, blank=True)
     featured_image = models.NullBooleanField(blank=True, help_text="The active 1st image to appear")
+    main_label = models.CharField(max_length=2000, blank=True, null=True)
+    sub_label = models.CharField(max_length=2000, blank=True, null=True)
 
 class Portfolio(Page):
     '''

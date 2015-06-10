@@ -89,8 +89,6 @@
 
 <h1>{% block title %}{% endblock %}</h1>
 
-
-
 </div>
 
 <div class="container">
@@ -103,9 +101,10 @@
 </div>
 {% endblock l_w %}
 
-<div class="col-md-7 middle">
+{% block middle_class %}<div class="col-md-7 middle">{% endblock middle_class %}
     {% block main %}{% endblock %}
-</div>
+{% block middle_class_div %}</div>{% endblock middle_class_div %}
+{% block r-w %}
 {% block r_w %}
 <div class="col-md-3 right">
     {% nevercache %}
@@ -122,6 +121,7 @@
     </div>
 </div>
 {% endblock r_w %}
+{% endblock r-w %}
 </div>
 </div>
 

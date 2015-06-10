@@ -16,28 +16,22 @@ $(document).ready(function(){
 
 
 
-{% block l_w %}{% endblock l_w %}
 
+{% block l_w %}{% endblock %}
+{% block middle_class %}<div class="col-xs-12 middle">{% endblock middle_class %}
 {% block main %}
     
-
-<div class="header">
-    	<div class="wrap">
-        	<!--<div class="navbar navbar_ clearfix">-->
-            	<div class="container">
+    <!--header-->
+                  <div class="header">    	            	
                     <div class="row">
-                        <div class="span4">
-                        	<div class="logo"><a href="/"><img src="{% static "img/django.gif" %}" alt="" /></a></div>                                
-                                    <div>{{ settings.SITE_TAGLINE }}</div>                        
-                        </div>
-                        
-                           
-                        </div>
-                    </div>                
-                </div>
-             </div>
-        </div>    
-    </div>
+                    
+                      <div class="col-md-4 pull-left">
+                        <div class="logo"><a href="/"><img src="{% static "img/django.gif" %}" alt="" /></a></div>                                
+                        <div><h5>{{ settings.SITE_TAGLINE }}</h5></div>                        
+                      </div>
+                                                 
+                    </div>                                                       
+                  </div>
     <!--//header-->    
      
     <!--page_container-->
@@ -93,7 +87,9 @@ $(document).ready(function(){
 </div>
       {% endif %}
       <!-- //Carousel -->
-<div class="container">
+      
+      <!--Quote-->
+<div class="container-fluid">
 <blockquote class="pull-right">
 
   <p>The world is a dangerous place to live; not because of the people who are evil, but because of the people who don't do anything about it.</p>
@@ -102,10 +98,14 @@ $(document).ready(function(){
 
 </blockquote>
 </div>
-        <!--featured works-->
+      <!--//Quote-->
+      
+        <!--temporary portfolio-->
+        
         {% if temp_portfolio %}
           
-            <div class="row text-justify">  <!--random 4-->
+            <div class="row">  <!--random 4-->
+            <div class="col-md-9">
               {% for tp_object in temp_portfolio %}
                 
                   <div class="panel panel-info">
@@ -118,10 +118,10 @@ $(document).ready(function(){
                       
                         <div class="list-group">
                           <ul class="list-inline">
-                          {% for itemporter in tp_object.item_porter.all|slice:":4" %}
+                          {% for itemporter in tp_object.item_porter.all|slice:":3" %}
 
                             
-                              <li class="col-xs-12 col-md-3">                                                                                       
+                              <li class="col-xs-12 col-md-4">                                                                                       
                                 <div class="thumbnail">
                                 
                                 <a href="{{ itemporter.portfolio_item.page_ptr.get_absolute_url }}" class="list-group-item">
@@ -152,23 +152,40 @@ $(document).ready(function(){
                     
                   </div>
                    
-              {% endfor %}
+              {% endfor %}              
             </div>
+            {% block r_w %}{{ block.super }}{% endblock %}
+          </div>
           
         {% endif %}
-        <!--//featured works-->
+        <!--//temporary portfolio-->
 
         <!-- selected portfolio -->
-        <div class="wrap_block"> <!--random 4-->
+        <div class="container"> <!--random 4-->
         {% if page.homepage.porter %}
-          {% for porter in page.homepage.porter.all %}
-            <h4>{{ porter.multiport.title }}</h4>
-              
-              {% for kid in porter.multiport.children.all|slice:":3" %}               
-                <p>{{ kid.title }}</p>                  
+        
+          {% for porter in page.homepage.porter.all|slice:":4" %}
+            <h4>{{ porter.multiport.title }}<a href="{{ porter.multiport.page_ptr.get_absolute_url }}" > 
+            <small><i>View All</i></small></a></h4>
+            <img src="{% static 'img/line.png' %}" alt="line">
+            
+              <div class="row">
+              {% for port_item in porter.multiport.children.all|slice:":3" %}               
+                <div class="media">
+                  <a href="{{ port_item.get_absolute_url }}" class="pull-left">
+                    <img src="{{ MEDIA_URL }}{% thumbnail port_item.portfolioitem.featured_image 238 175 %}" class="media-object" 
+                    alt="{{ port_item.title }}" width="150" height="140">
+                  </a>
+                  <div class="media-body">
+                    <h4 class="media-heading"><a href="{{ port_item.get_absolute_url }}" >{{ port_item.title }}</a> <small><i>{{ port_item.publish_date }}</i></small></h4>
+                    <p>{{ port_item.portfolioitem.short_description|richtext_filters|safe|truncatewords:40 }}</p>
+                  </div>                
+                </div>                
               {% endfor %}
-              
+              </div>
+              <br>
           {% endfor %}
+          
         {% endif %}
         </div>
         <!-- //selected portfolio -->
@@ -180,5 +197,6 @@ $(document).ready(function(){
         <!--//planning-->       
          
 {% endblock %}
+{% block r-w %}{% endblock r-w %}
 
-{% block r_w %}{% endblock r_w %}
+
