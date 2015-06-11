@@ -60,8 +60,8 @@ $(document).ready(function(){
                 <img src="{{ MEDIA_URL }}{% thumbnail slide.image 1920 690 %}" class="img-responsive" alt="">
                 <h2>Slide 1</h2>                
          		 <div class="carousel-caption">
-                  <h3>First slide label</h3>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <h3>{{ slide.main_label|title }}</h3>
+                  <p>{{ slide.sub_label }}</p>
                 </div>
             </div>
             {% else %}
@@ -69,8 +69,8 @@ $(document).ready(function(){
                 <img src="{{ MEDIA_URL }}{% thumbnail slide.image 1920 690 %}" alt="">
                 <h2>Slide 1</h2>                
          		 <div class="carousel-caption">
-                  <h3>First slide label</h3>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <h3>{{ slide.main_label|title }}</h3>
+                  <p>{{ slide.sub_label }}</p>
                 </div>
             </div>
             {% endif %}
@@ -120,7 +120,6 @@ $(document).ready(function(){
                           <ul class="list-inline">
                           {% for itemporter in tp_object.item_porter.all|slice:":3" %}
 
-                            
                               <li class="col-xs-12 col-md-4">                                                                                       
                                 <div class="thumbnail">
                                 
@@ -166,8 +165,8 @@ $(document).ready(function(){
         
           {% for porter in page.homepage.porter.all|slice:":4" %}
             <h4>{{ porter.multiport.title }}<a href="{{ porter.multiport.page_ptr.get_absolute_url }}" > 
-            <small><i>View All</i></small></a></h4>
-            <img src="{% static 'img/line.png' %}" alt="line">
+            <small><i class="pull-right">View All</i></small></a></h4>
+            <div class="line-separator"></div><br>
             
               <div class="row">
               {% for port_item in porter.multiport.children.all|slice:":3" %}               
