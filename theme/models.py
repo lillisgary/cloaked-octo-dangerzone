@@ -34,6 +34,15 @@ class Slide(Orderable):
     featured_image = models.NullBooleanField(blank=True, help_text="The active 1st image to appear")
     main_label = models.CharField(max_length=2000, blank=True, null=True)
     sub_label = models.CharField(max_length=2000, blank=True, null=True)
+    
+class Portfolios(Page, RichText):
+	'''
+	A collection of portfolio items
+	'''
+	
+	class Meta:
+		verbose_name = _("Portfolios")
+		verbose_name_plural = _("Portfolios'")
 
 class Portfolio(Page):
     '''

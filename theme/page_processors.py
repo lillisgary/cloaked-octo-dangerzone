@@ -1,5 +1,15 @@
 from mezzanine.pages.page_processors import processor_for
-from .models import Portfolio, PortfolioItem, PortfolioItemCategory, HomePage, TempPortfolio
+from .models import Portfolio, PortfolioItem, PortfolioItemCategory, HomePage, TempPortfolio, Portfolios
+
+@processor_for(Portfolios)
+def portfolios_processor(request, page):
+	'''
+	Adds portfolio context to portfolios page
+	'''
+	portfolios = Portfolio.objects.published(
+	    for_user=request.user).select_related().all()
+	portfolios = portfolios.filter(parent=page) ##porfolio pages need to nested under here
+	return {'portfolios': portfolios}
 
 @processor_for(Portfolio)
 def portfolio_processor(request, page):
@@ -32,7 +42,6 @@ def home_processor(request, page):
     # manually select portfolio pages
     portfolio = Portfolio.objects.published(
         for_user=request.user).select_related().all()
-    portfolio = portfolio.filter(parent=page)
     temp_portfolio = TempPortfolio.objects.published(
         for_user=request.user).select_related().all()
     temp_portfolio = temp_portfolio.filter(parent=page) ##TempPorfolio should be nested under the HomePage
