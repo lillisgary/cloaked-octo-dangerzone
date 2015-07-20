@@ -25,7 +25,7 @@
     <div class="media">
       <a href="{{ item.page_ptr.get_absolute_url }}" class="pull-left">
         <img src="{{ MEDIA_URL }}{% thumbnail item.featured_image 238 175 %}" class="media-object"
-        alt="{{ item.title }}" width="150" height="140">
+        alt="{{ item.title }}" ><!--width="150" height="140"-->
       </a>
       <div class="media-body">
         <h4 class="media-heading" ><a href="{{ item.page_ptr.get_absolute_url }}" >{{ item.title|title }}</a> 
