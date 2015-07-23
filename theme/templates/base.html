@@ -16,9 +16,10 @@
 {% endifinstalled %}
 
 {% compress css %}
-<link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
+
 <link rel="stylesheet" href="{% static "css/mezzanine.css" %}">
-<link rel="stylesheet" href="{% static "css/bootstrap-theme.css" %}">
+
+<link rel="stylesheet" href="{% static "css/bootstrap_cyborg_dark.css" %}">
 <link rel="stylesheet" href="{% static "css/carousel.css" %}">
 <link rel="stylesheet" href="{% static "css/addon.css" %}">
 
@@ -124,7 +125,9 @@
 </div>
 </div>
 
-<footer>
+
+
+<footer style="margin-bottom: 0px;" class="panel panel-default">
 <div class="container">
 {% page_menu "pages/menus/footer.html" %}
 
